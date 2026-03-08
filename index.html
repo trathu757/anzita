@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anzita</title>
+    <meta name="description"
+        content="Khám phá món ăn ngẫu nhiên khi bạn đang phân vân không biết nên ăn gì. Đổ xúc xắc để nhận gợi ý món ăn!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo-link" data-page="home">
+                <img src="logo.png" alt="Anzita" class="logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link active" data-page="home">Trang Chủ</a></li>
+                <li><a href="#" class="nav-link" data-page="dishes">Món Ăn</a></li>
+                <li><a href="#" class="nav-link" data-page="schedule">Lịch Ăn Gợi Ý</a></li>
+                <li><a href="#" class="nav-link" data-page="info">Thông Tin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main id="main-content">
+        <!-- Home Page - Dice Rolling -->
+        <div id="home-page" class="page active">
+            <div class="dice-container">
+                <p id="thinking-text" class="thinking-text hidden">Hmmm...</p>
+                <div id="dice" class="dice">
+                    <img src="character.png" alt="Character" class="dice-image">
+                </div>
+                <h2 class="dice-title">Bấm vào để bắt ông ta nghĩ món</h2>
+
+                <!-- Result Display -->
+                <div id="result-container" class="result-container hidden">
+                    <div class="result-card">
+                        <h3 id="dish-name" class="dish-name"></h3>
+                        <div class="result-buttons">
+                            <button id="view-recipe-btn" class="btn btn-primary">
+                                Xem công thức
+                            </button>
+                            <button id="view-info-btn" class="btn btn-secondary">
+                                Xem thông tin
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="empty-state" class="empty-state hidden">
+                    <p class="empty-message">Ôi không, chưa có món ăn trong danh sách!</p>
+                    <p class="empty-message">Hãy tạo món ăn đầu tiên của bạn nhé.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dishes Management Page -->
+        <div id="dishes-page" class="page">
+            <div class="page-header">
+                <h2>Danh sách món ăn</h2>
+                <button id="add-dish-btn" class="btn btn-accent">Thêm món ăn</button>
+            </div>
+
+            <div id="dishes-grid" class="dishes-grid">
+                <!-- Dishes will be rendered here -->
+            </div>
+
+            <div id="no-dishes" class="no-dishes hidden">
+                <p>Chưa có món ăn nào. Hãy thêm món ăn đầu tiên!</p>
+            </div>
+        </div>
+
+        <!-- Schedule Page -->
+        <div id="schedule-page" class="page">
+            <div class="page-header">
+                <div class="schedule-controls">
+                    <div class="week-navigation">
+                        <button id="prev-week-btn" class="icon-btn" title="Tuần trước">◀</button>
+                        <span id="current-week-label">Tuần này</span>
+                        <button id="next-week-btn" class="icon-btn" title="Tuần sau">▶</button>
+                    </div>
+                    <div class="schedule-actions">
+                        <button id="roll-week-btn" class="btn btn-primary">🎲 Tung xúc xắc tuần này</button>
+                        <button id="clear-schedule-btn" class="btn btn-secondary">Xóa lịch</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="schedule-container">
+                <div id="schedule-grid" class="schedule-grid">
+                    <!-- Schedule headers and slots will be rendered here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Page -->
+        <div id="info-page" class="page">
+            <div class="info-container">
+                <!-- Section 1: Mục đích -->
+                <div class="info-section purpose-section">
+                    <h2 class="info-title">Mục đích tạo ra Anzita:</h2>
+                    <p class="info-text">
+                        Hello, mình đặt tên Anzita nghĩa đơn giản chỉ là dịch theo câu hỏi "ăn gì ta?" mà mỗi người
+                        thường hay tự hỏi cứ khi đến bữa.
+                    </p>
+                    <p class="info-text">
+                        Trang web này không bỏ quá nhiều chất xám về mặt sáng tạo, và công sức về mặt lập trình, vì đơn
+                        giản mình chỉ muốn tạo ra một Portfolio để phục vụ cho kỹ năng/công việc Tester (QA/QC). Đầu ra
+                        mong đợi của mình là bộ tài liệu bao gồm Test Case, Bug Report, Mini SRS, và API Documentation
+                        hoàn chỉnh,
+                        cũng như luyện tập cách test API trên chính trang web tự tạo, nên tất nhiên là không đặt kỳ vọng
+                        cao cho tính ứng dụng của web đối với
+                        nhiều người. Lời cuối nhưng quan trọng, web được tạo ra với sự hỗ trợ mạnh mẽ từ AI.
+                    </p>
+                </div>
+
+                <!-- Section 2: Slogan -->
+                <div class="info-section slogan-section">
+                    <h3 class="slogan-text">Hãy sử dụng tự do vì Anzita là miễn phí.</h3>
+                    <div class="curved-text-container">
+                        <svg viewBox="0 0 800 200" class="curved-svg">
+                            <path id="curve" d="M 50,180 Q 400,20 750,180" fill="transparent" />
+                            <text class="curved-text">
+                                <textPath href="#curve" startOffset="50%" text-anchor="middle">
+                                    Chúc bạn ngon miệng!
+                                </textPath>
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Section 3: Liên hệ -->
+                <div class="info-section contact-section">
+                    <h2 class="info-title">Liên hệ</h2>
+                    <ul class="contact-list">
+                        <li>
+                            <span class="contact-label">Tên:</span>
+                            <span class="contact-value">Thư Trà - Chloe</span>
+                        </li>
+                        <li>
+                            <span class="contact-label">Gmail:</span>
+                            <a href="mailto:trathu757@gmail.com"
+                                class="contact-value contact-link">trathu757@gmail.com</a>
+                        </li>
+                        <li>
+                            <span class="contact-label">LinkedIn:</span>
+                            <a href="https://www.linkedin.com/in/thu-tra-610103174/" target="_blank"
+                                rel="noopener noreferrer" class="contact-value contact-link">thu-tra-610103174</a>
+                        </li>
+                        <li>
+                            <span class="contact-label">Github:</span>
+                            <a href="https://github.com/trathu757" target="_blank" rel="noopener noreferrer"
+                                class="contact-value contact-link">trathu757</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Recipe/Info Display -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h3 id="modal-title" class="modal-title"></h3>
+            <div id="modal-body" class="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Modal for Dishes Tab (Side-by-side view) -->
+    <div id="detail-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="detail-modal-content">
+            <button class="modal-close">&times;</button>
+            <h3 id="detail-modal-title" class="modal-title"></h3>
+            <div id="detail-modal-body" class="detail-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Modal for Add/Edit Dish -->
+    <div id="dish-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h3 id="dish-modal-title" class="modal-title">Thêm món ăn</h3>
+            <form id="dish-form" class="dish-form">
+                <div class="form-group">
+                    <label for="dish-name-input">Tên món </label>
+                    <input type="text" id="dish-name-input" required placeholder="Ví dụ: Phở">
+                </div>
+                <div class="form-group">
+                    <label for="dish-recipe-input">Công thức</label>
+                    <textarea id="dish-recipe-input" rows="6" required
+                        placeholder="Nhập công thức làm món ăn..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="dish-info-input">Thông tin</label>
+                    <textarea id="dish-info-input" rows="4" required
+                        placeholder="Nhập thông tin về món ăn..."></textarea>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">Lưu món ăn</button>
+                    <button type="button" class="btn btn-secondary cancel-btn">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dice Overlay -->
+    <div id="dice-overlay" class="modal hidden">
+        <div class="dice-overlay-content">
+            <div id="schedule-dice" class="dice">
+                <img src="character.png" alt="Dice" class="dice-image">
+            </div>
+            <p class="thinking-text">Đang tính toán thực đơn...</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
