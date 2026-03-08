@@ -925,6 +925,13 @@ body {
     overflow: hidden;
     font-size: 0.95rem;
     line-height: 1.4;
+    cursor: pointer;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.meal-name:hover {
+    color: var(--yellow);
+    transform: scale(1.05);
 }
 
 .add-meal-btn {

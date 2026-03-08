@@ -738,6 +738,7 @@ function createMealSlot(date, type) {
         `;
 
         // Event Listeners
+        mealContent.querySelector('.meal-name').addEventListener('click', () => viewDish(dish));
         mealContent.querySelector('.reroll-meal').addEventListener('click', () => rerollMeal(date, type));
         mealContent.querySelector('.delete-meal').addEventListener('click', () => updateMealSchedule(date, type, null));
     } else {
