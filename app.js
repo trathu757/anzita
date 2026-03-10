@@ -489,11 +489,7 @@ function handleDishFormSubmit(e) {
 }
 
 function deleteDish(id) {
-    if (confirm('Bạn có chắc chắn muốn xóa món ăn này?')) {
-        dishes = dishes.filter(d => d.id !== id);
-        saveDishes();
-        renderDishesPage();
-    }
+    showAlert('Tính năng xóa tạm thời bị giới hạn trong bản demo này.');
 }
 
 function viewDish(dish) {
@@ -588,6 +584,7 @@ document.addEventListener('keydown', (e) => {
         closeModal(modal);
         closeModal(dishModal);
         closeModal(detailModal);
+        closeModal(document.getElementById('alert-modal'));
     }
 
     // Quick dice roll with Space key (only on home page)
@@ -773,7 +770,7 @@ function updateMealSchedule(date, type, dishId) {
 
 function rerollMeal(date, type) {
     if (dishes.length === 0) {
-        alert('Chưa có món ăn nào để gợi ý!');
+        showAlert('Chưa có món ăn nào để gợi ý!\nHãy thêm món ăn trước.');
         return;
     }
 
@@ -792,7 +789,7 @@ function rerollMeal(date, type) {
 
 function rollWeekSchedule() {
     if (dishes.length === 0) {
-        alert('Chưa có món ăn nào để gợi ý! Hãy thêm món ăn trước.');
+        showAlert('Chưa có món ăn nào để gợi ý!\nHãy thêm món ăn trước.');
         return;
     }
 
@@ -832,14 +829,22 @@ function rollWeekSchedule() {
 
 
 function clearCurrentWeek() {
-    if (confirm('Bạn có chắc chắn muốn xóa lịch ăn tuần này?')) {
-        for (let i = 0; i < 7; i++) {
-            const day = new Date(currentWeekStart);
-            day.setDate(day.getDate() + i);
-            const dateStr = formatDate(day);
-            delete schedule[dateStr];
-        }
-        saveSchedule();
-        renderSchedulePage();
-    }
+    showAlert('Tính năng xóa lịch tạm thời bị giới hạn.');
+}
+
+// ==================== Alert Modal Logic ====================
+function showAlert(message) {
+    const alertModal = document.getElementById('alert-modal');
+    const alertBody = document.getElementById('alert-modal-body');
+    const closeBtn = alertModal.querySelector('.modal-close-btn');
+
+    alertBody.textContent = message;
+    openModal(alertModal);
+
+    // One-time listener for the OK button
+    const closeHandler = () => {
+        closeModal(alertModal);
+        closeBtn.removeEventListener('click', closeHandler);
+    };
+    closeBtn.addEventListener('click', closeHandler);
 }
