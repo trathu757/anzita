@@ -1175,3 +1175,18 @@ body {
         gap: 4px;
     }
 }
+/* ==================== Alert Modal ==================== */
+.modal-alert {
+    max-width: 400px;
+    text-align: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.modal-alert .modal-body {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+}
