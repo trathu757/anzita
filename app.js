@@ -362,7 +362,6 @@ function setupEventListeners() {
     // Schedule Actions
     rollWeekBtn.addEventListener('click', rollWeekSchedule);
     clearScheduleBtn.addEventListener('click', clearCurrentWeek);
-    clearScheduleBtn.addEventListener('click', clearCurrentWeek);
 }
 
 // ==================== Page Navigation ====================
@@ -489,7 +488,11 @@ function handleDishFormSubmit(e) {
 }
 
 function deleteDish(id) {
-    showAlert('Tính năng xóa tạm thời bị giới hạn trong bản demo này.');
+    if (confirm('Bạn có chắc chắn muốn xóa món ăn này?')) {
+        dishes = dishes.filter(d => d.id !== id);
+        saveDishes();
+        renderDishesPage();
+    }
 }
 
 function viewDish(dish) {
@@ -829,7 +832,16 @@ function rollWeekSchedule() {
 
 
 function clearCurrentWeek() {
-    showAlert('Tính năng xóa lịch tạm thời bị giới hạn.');
+    if (confirm('Bạn có chắc chắn muốn xóa lịch ăn tuần này?')) {
+        for (let i = 0; i < 7; i++) {
+            const day = new Date(currentWeekStart);
+            day.setDate(day.getDate() + i);
+            const dateStr = formatDate(day);
+            delete schedule[dateStr];
+        }
+        saveSchedule();
+        renderSchedulePage();
+    }
 }
 
 // ==================== Alert Modal Logic ====================
