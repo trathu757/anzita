@@ -4,6 +4,7 @@ Anzita API Documentation
 Tài liệu này hướng dẫn cách kiểm thử các API của dự án Anzita bằng Postman.
 
 Cài đặt và Chạy Server
+
 Cách 1: Sử dụng Python (Đã cài sẵn trên máy)
 Nếu máy bạn chưa có Node.js, bạn có thể dùng Python để chạy server:
 1. Mở Terminal tại thư mục dự án.
