@@ -1,0 +1,83 @@
+BUG-API001: Trùng lặp ID khi lấy danh sách món ăn (Duplicate ID Issue)
+1. Thông tin chung
+ID: BUG-API001
+Mức độ nghiêm trọng: High
+Mức độ ưu tiên: P1
+Phạm vi: /api/dishes
+
+2. Chi tiết API
+Endpoint URL: http://localhost:3000/api/dishes
+Phương thức: GET
+
+3. Các bước tái hiện
+Thực hiện tạo mới 2 món ăn khác nhau bằng lệnh POST. Chủ ý gán trường id của các món ăn vừa tạo giống nhau.
+Truy cập lệnh GET để xem danh sách món ăn.
+Kiểm tra trường id của các món ăn vừa tạo.
+
+4. Kết quả mong đợi
+Mỗi món ăn được tạo ra phải có một ID duy nhất (Unique ID).
+Response trả về đầy đủ tất cả các món ăn đã được tạo.
+
+5. Kết quả thực tế
+Hệ thống tạo ra 2 món ăn nhưng gán cùng một giá trị id (do logic tính len(dishes) + 1 không xử lý được trường hợp danh sách biến động).
+Khi GET danh sách, response có thể bị mất dữ liệu hoặc hiển thị sai lệch do trùng ID.
+Điều này cũng xảy ra tương tự với lệnh PUT, nghĩa là chủ ý thay đổi trường id của món ăn trùng với món đã có.
+----------
+BUG-API002: Lỗi cho phép tạo món ăn với dữ liệu rỗng (Missing Data Validation)
+1. Thông tin chung
+ID: BUG-API002
+Mức độ nghiêm trọng: Medium
+Mức độ ưu tiên: P2
+Phạm vi: /api/dishes
+
+2. Chi tiết API
+Endpoint URL: http://localhost:3000/api/dishes
+Phương thức: POST
+Request Body (Rỗng):
+
+{}
+
+3. Các bước tái hiện
+Mở Postman, chọn phương thức POST.
+Nhập Body là một cặp ngoặc nhọn rỗng {}.
+Nhấn Send.
+
+4. Kết quả mong đợi
+Status Code: 400 Bad Request.
+Response Body: Trả về thông báo lỗi yêu cầu các trường bắt buộc (name, recipe, info).
+
+5. Kết quả thực tế
+Status Code: 201 Created.
+Response Body: Một bản ghi mới được tạo với các giá trị rỗng: {"id": "...", "name": "", "recipe": "", "info": ""}.
+----------
+BUG-API003: Server bị treo khi gửi JSON sai định dạng (JSON Parsing Exception)
+1. Thông tin chung
+ID: BUG-API003
+Mức độ nghiêm trọng: High (System Stability)
+Mức độ ưu tiên: P1
+Phạm vi: Toàn bộ API sử dụng POST/PUT
+
+2. Chi tiết API
+Endpoint URL: http://localhost:3000/api/dishes
+Phương thức: POST
+Request Body (Sai định dạng):
+
+{
+  name: Phở Bò, // Thiếu dấu ngoặc kép cho key và value
+  recipe: ...
+}
+
+3. Các bước tái hiện
+Mở Postman, chọn phương thức POST.
+Nhập dữ liệu JSON sai cú pháp (ví dụ: thiếu dấu ngoặc kép, thiếu dấu phẩy).
+Nhấn Send.
+
+4. Kết quả mong đợi
+Status Code: 400 Bad Request.
+Response Body: Thông báo lỗi định dạng JSON không hợp lệ.
+
+5. Kết quả thực tế
+Server không trả về Status Code.
+Postman hiển thị thông báo lỗi: "Could not get response - Error: socket hang up".
+
+Reporter: Thư Trà - Chloe (QA/QC)
